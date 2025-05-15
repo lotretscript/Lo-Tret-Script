@@ -49,9 +49,9 @@ Window:EditOpenButton({
 })
 
 local Tabs = {
-    Skills = Window:Tab({ Title = "Insant Skills", Icon = "sparkles", Desc = "Insant Use Skills" }),
-    Slap = Window:Tab({ Title = "Get Slap", Icon = "house", Desc = "Get ALL Slap" }),
-    Secret Slap = Window:Tab({ Title = "Get Secret Slap", Icon = "mouse-pointer-2", Desc = "Get Secret Slap" }),
+    Skills = Window:Tab({ Title = "Intsant Use Skills", Icon = "sparkles", Desc = "Get All Slap" }),
+    Slap = Window:Tab({ Title = "Get Slap", Icon = "house", Desc = "Get All Slap" }),
+    Secret = Window:Tab({ Title = "Get Secret Slap", Icon = "mouse-pointer-2", Desc = "Secret" }),
     Teleport = Window:Tab({ Title = "Teleport", Icon = "bolt", Desc = "Teleport To Place" }),
     Credit = Window:Tab({ Title = "Credit", Icon = "eye", Desc = "Made By: @Lo_Tret_Meme" }),
     Player = Window:Tab({ Title = "Player", Icon = "dna", Desc = "Player Edit" }),
@@ -76,7 +76,7 @@ Tabs.Slap:Button({
 
 Tabs.Slap:Button({
     Title = "Get Default Slap",
-    Desc = "Insant Equip Default Slap",
+    Desc = "Instant Equip Default Slap",
     Callback = function()
         local args = {
             [1] = "DefaultSlap"
@@ -88,7 +88,7 @@ Tabs.Slap:Button({
 
 Tabs.Slap:Button({
     Title = "Get Gold Slap",
-    Desc = "Insant Equip Gold Slap",
+    Desc = "Instant Equip Gold Slap",
     Callback = function()
         local args = {
             [1] = "GoldSlap"
