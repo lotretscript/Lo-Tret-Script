@@ -49,11 +49,13 @@ Window:EditOpenButton({
 })
 
 local Tabs = {
+    Skills = Window:Tab({ Title = "Insant Skills", Icon = "sparkles", Desc = "Get All Slap" }),
     Slap = Window:Tab({ Title = "Get Slap", Icon = "house", Desc = "Get All Slap" }),
     Secret Slap = Window:Tab({ Title = "Get Secret Slap", Icon = "mouse-pointer-2", Desc = "Secret" }),
     Teleport = Window:Tab({ Title = "Teleport", Icon = "bolt", Desc = "Teleport To Place"}),
     Credit = Window:Tab({ Title = "Credit", Icon = "eye", Desc = "Made By: @Lo_Tret_Meme" }),
     Player = Window:Tab({ Title = "Player", Icon = dna", Desc = "Player Edit" }),
+    Settings = Window:Tab({ Title = Settings", Icon = "settings", Desc = "Edit Ui" }),
     b = Window:Divider(),
     WindowTab = Window:Tab({ Title = "Made By @Lo_Tret_Meme ", Icon = "settings", Desc = "Only Youtube" }),
     be = Window:Divider(),
@@ -64,100 +66,39 @@ Tabs.Slap:Button({
     Title = "Remove All Slap",
     Desc = "Remove Your Slap",
     Callback = function()
-        local args = { "Horse" }
-        local Remote = game:GetService("ReplicatedStorage").Shared.RemotePromise.Remotes
-        Remote.C_BuyClass:FireServer(unpack(args))
-        task.wait()
-        Remote.C_EquipClass:FireServer(unpack(args))
+        local args = {
+            [1] = "None"
+        }
+
+        game:GetService("ReplicatedStorage"):WaitForChild("EquipSlapEvent"):FireServer(unpack(args))
     end
 })
 
-Tabs.Show:Toggle({ Title = "Show Time", Default = false, Callback = function(state) print(tostring(state)) end })
-
-local themeValues = {}
-for name, _ in pairs(WindUI:GetThemes()) do
-    table.insert(themeValues, name)
-end
-
-local themeDropdown = Tabs.Theme:Dropdown({
-    Title = "Select Theme",
-    Multi = false,
-    AllowNone = false,
-    Value = nil,
-    Values = themeValues,
-    Callback = function(theme)
-        WindUI:SetTheme(theme)
-    end
-})
-themeDropdown:Select(WindUI:GetCurrentTheme())
-
-local currentThemeName = WindUI:GetCurrentTheme()
-local themes = WindUI:GetThemes()
-
-local ThemeAccent = themes[currentThemeName].Accent
-local ThemeOutline = themes[currentThemeName].Outline
-local ThemeText = themes[currentThemeName].Text
-local ThemePlaceholderText = themes[currentThemeName].PlaceholderText
-
-function updateTheme()
-    WindUI:AddTheme({
-        Name = currentThemeName,
-        Accent = ThemeAccent,
-        Outline = ThemeOutline,
-        Text = ThemeText,
-        PlaceholderText = ThemePlaceholderText
-    })
-    WindUI:SetTheme(currentThemeName)
-end
-
-local CreateInput = Tabs.Theme:Input({
-    Title = "Theme Name",
-    Value = currentThemeName,
-    Callback = function(name)
-        currentThemeName = name
-    end
-})
-
-Tabs.Theme:Colorpicker({
-    Title = "Background Color",
-    Default = Color3.fromHex(ThemeAccent),
-    Callback = function(color)
-        ThemeAccent = color:ToHex()
-    end
-})
-
-Tabs.Theme:Colorpicker({
-    Title = "Outline Color",
-    Default = Color3.fromHex(ThemeOutline),
-    Callback = function(color)
-        ThemeOutline = color:ToHex()
-    end
-})
-
-Tabs.Theme:Colorpicker({
-    Title = "Text Color",
-    Default = Color3.fromHex(ThemeText),
-    Callback = function(color)
-        ThemeText = color:ToHex()
-    end
-})
-
-Tabs.Theme:Colorpicker({
-    Title = "Placeholder Text Color",
-    Default = Color3.fromHex(ThemePlaceholderText),
-    Callback = function(color)
-        ThemePlaceholderText = color:ToHex()
-    end
-})
-
-Tabs.Theme:Button({
-    Title = "Update Theme",
+Tabs.Slap:Button({
+    Title = "Get Default Slap",
+    Desc = "Insant Equip Default Slap",
     Callback = function()
-        updateTheme()
+        local args = {
+            [1] = "DefaultSlap"
+        }
+
+        game:GetService("ReplicatedStorage"):WaitForChild("EquipSlapEvent"):FireServer(unpack(args))
     end
 })
 
-local ToggleTransparency = Tabs.Setting:Toggle({
+Tabs.Slap:Button({
+    Title = "Get Gold Slap",
+    Desc = "Insant Equip Gold Slap",
+    Callback = function()
+        local args = {
+            [1] = "GoldSlap"
+        }
+
+        game:GetService("ReplicatedStorage"):WaitForChild("EquipSlapEvent"):FireServer(unpack(args))
+    end
+})
+
+local ToggleTransparency = Tabs.Settings:Toggle({
     Title = "Transparency",
     Callback = function(e)
         Window:ToggleTransparency(e)
