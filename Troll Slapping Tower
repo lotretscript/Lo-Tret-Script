@@ -49,13 +49,13 @@ Window:EditOpenButton({
 })
 
 local Tabs = {
-    Skills = Window:Tab({ Title = "Insant Skills", Icon = "sparkles", Desc = "Get All Slap" }),
-    Slap = Window:Tab({ Title = "Get Slap", Icon = "house", Desc = "Get All Slap" }),
-    Secret Slap = Window:Tab({ Title = "Get Secret Slap", Icon = "mouse-pointer-2", Desc = "Secret" }),
-    Teleport = Window:Tab({ Title = "Teleport", Icon = "bolt", Desc = "Teleport To Place"}),
+    Skills = Window:Tab({ Title = "Insant Skills", Icon = "sparkles", Desc = "Insant Use Skills" }),
+    Slap = Window:Tab({ Title = "Get Slap", Icon = "house", Desc = "Get ALL Slap" }),
+    Secret Slap = Window:Tab({ Title = "Get Secret Slap", Icon = "mouse-pointer-2", Desc = "Get Secret Slap" }),
+    Teleport = Window:Tab({ Title = "Teleport", Icon = "bolt", Desc = "Teleport To Place" }),
     Credit = Window:Tab({ Title = "Credit", Icon = "eye", Desc = "Made By: @Lo_Tret_Meme" }),
-    Player = Window:Tab({ Title = "Player", Icon = dna", Desc = "Player Edit" }),
-    Settings = Window:Tab({ Title = Settings", Icon = "settings", Desc = "Edit Ui" }),
+    Player = Window:Tab({ Title = "Player", Icon = "dna", Desc = "Player Edit" }),
+    Settings = Window:Tab({ Title = "Settings", Icon = "settings", Desc = "Edit Ui" }),
     b = Window:Divider(),
     WindowTab = Window:Tab({ Title = "Made By @Lo_Tret_Meme ", Icon = "settings", Desc = "Only Youtube" }),
     be = Window:Divider(),
