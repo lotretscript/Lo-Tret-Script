@@ -1,1 +1,166 @@
+local WindUI = loadstring(game:HttpGet("https://tree-hub.vercel.app/api/UI/WindUI"))()
 
+function gradient(text, startColor, endColor)
+    local result = ""
+    local length = #text
+    for i = 1, length do
+        local t = (i - 1) / math.max(length - 1, 1)
+        local r = math.floor((startColor.R + (endColor.R - startColor.R) * t) * 255)
+        local g = math.floor((startColor.G + (endColor.G - startColor.G) * t) * 255)
+        local b = math.floor((startColor.B + (endColor.B - startColor.B) * t) * 255)
+        local char = text:sub(i, i)
+        result = result .. "<font color=\"rgb(" .. r ..", " .. g .. ", " .. b .. ")\">" .. char .. "</font>"
+    end
+    return result
+end
+
+local Confirmed = false
+WindUI:Popup({
+    Title = "Welcome :D",
+    Icon = "info",
+    Content = "Do you want use this?  " .. gradient("Lo Tret Script", Color3.fromHex("#00FF87"), Color3.fromHex("#60EFFF")) .. " Script",
+    Buttons = {
+        { Title = "Cancel ;-;", Icon = "close", Callback = function() end, Variant = "Tertiary" },
+        { Title = "Continue :D", Icon = "arrow-right", Callback = function() Confirmed = true end, Variant = "Primary" }
+    }
+})
+repeat task.wait() until Confirmed
+
+local Window = WindUI:CreateWindow({
+    Title = "Lo Tret-Troll Slapping",
+    Icon = "house",
+    Author = "Troll Slapping Tower",
+    Folder = "CloudHub",
+    Size = UDim2.fromOffset(320, 200),
+    Transparent = true,
+    Theme = "Dark",
+    UserEnabled = false,
+    SideBarWidth = 200,
+    HasOutline = true,
+})
+
+Window:EditOpenButton({
+    Title = "Lo Tret-Troll Slapping Tower",
+    Icon = "monitor",
+    CornerRadius = UDim.new(0,16),
+    StrokeThickness = 2,
+    Color = ColorSequence.new(Color3.fromHex("FF0F7B"), Color3.fromHex("F89B29")),
+    Draggable = true,
+})
+
+local Tabs = {
+    Slap = Window:Tab({ Title = "Get Slap", Icon = "house", Desc = "Get All Slap" }),
+    Secret Slap = Window:Tab({ Title = "Get Secret Slap", Icon = "mouse-pointer-2", Desc = "Secret" }),
+    Teleport = Window:Tab({ Title = "Teleport", Icon = "bolt", Desc = "Teleport To Place"}),
+    Credit = Window:Tab({ Title = "Credit", Icon = "eye", Desc = "Made By: @Lo_Tret_Meme" }),
+    Player = Window:Tab({ Title = "Player", Icon = dna", Desc = "Player Edit" }),
+    b = Window:Divider(),
+    WindowTab = Window:Tab({ Title = "Made By @Lo_Tret_Meme ", Icon = "settings", Desc = "Only Youtube" }),
+    be = Window:Divider(),
+}
+Window:SelectTab(1)
+
+Tabs.Slap:Button({
+    Title = "Remove All Slap",
+    Desc = "Remove Your Slap",
+    Callback = function()
+        local args = { "Horse" }
+        local Remote = game:GetService("ReplicatedStorage").Shared.RemotePromise.Remotes
+        Remote.C_BuyClass:FireServer(unpack(args))
+        task.wait()
+        Remote.C_EquipClass:FireServer(unpack(args))
+    end
+})
+
+Tabs.Show:Toggle({ Title = "Show Time", Default = false, Callback = function(state) print(tostring(state)) end })
+
+local themeValues = {}
+for name, _ in pairs(WindUI:GetThemes()) do
+    table.insert(themeValues, name)
+end
+
+local themeDropdown = Tabs.Theme:Dropdown({
+    Title = "Select Theme",
+    Multi = false,
+    AllowNone = false,
+    Value = nil,
+    Values = themeValues,
+    Callback = function(theme)
+        WindUI:SetTheme(theme)
+    end
+})
+themeDropdown:Select(WindUI:GetCurrentTheme())
+
+local currentThemeName = WindUI:GetCurrentTheme()
+local themes = WindUI:GetThemes()
+
+local ThemeAccent = themes[currentThemeName].Accent
+local ThemeOutline = themes[currentThemeName].Outline
+local ThemeText = themes[currentThemeName].Text
+local ThemePlaceholderText = themes[currentThemeName].PlaceholderText
+
+function updateTheme()
+    WindUI:AddTheme({
+        Name = currentThemeName,
+        Accent = ThemeAccent,
+        Outline = ThemeOutline,
+        Text = ThemeText,
+        PlaceholderText = ThemePlaceholderText
+    })
+    WindUI:SetTheme(currentThemeName)
+end
+
+local CreateInput = Tabs.Theme:Input({
+    Title = "Theme Name",
+    Value = currentThemeName,
+    Callback = function(name)
+        currentThemeName = name
+    end
+})
+
+Tabs.Theme:Colorpicker({
+    Title = "Background Color",
+    Default = Color3.fromHex(ThemeAccent),
+    Callback = function(color)
+        ThemeAccent = color:ToHex()
+    end
+})
+
+Tabs.Theme:Colorpicker({
+    Title = "Outline Color",
+    Default = Color3.fromHex(ThemeOutline),
+    Callback = function(color)
+        ThemeOutline = color:ToHex()
+    end
+})
+
+Tabs.Theme:Colorpicker({
+    Title = "Text Color",
+    Default = Color3.fromHex(ThemeText),
+    Callback = function(color)
+        ThemeText = color:ToHex()
+    end
+})
+
+Tabs.Theme:Colorpicker({
+    Title = "Placeholder Text Color",
+    Default = Color3.fromHex(ThemePlaceholderText),
+    Callback = function(color)
+        ThemePlaceholderText = color:ToHex()
+    end
+})
+
+Tabs.Theme:Button({
+    Title = "Update Theme",
+    Callback = function()
+        updateTheme()
+    end
+})
+
+local ToggleTransparency = Tabs.Setting:Toggle({
+    Title = "Transparency",
+    Callback = function(e)
+        Window:ToggleTransparency(e)
+    end,
+    Value = WindUI:GetTransparency()
+})
